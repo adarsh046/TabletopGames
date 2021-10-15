@@ -23,6 +23,9 @@ public class DiceMonasteryParams extends TunableParameters {
         addTunableParameter("prepareVellumCost", 2);
         addTunableParameter("hireNoviceCost", 3);
         addTunableParameter("waxPerCandle", 1);
+        addTunableParameter("vividInkPoints", 0.0);
+        addTunableParameter("vellumPoints", 0.0);
+        addTunableParameter("candlePoints", 0.0);
     }
 
     public String dataPath = "data/dicemonastery";
@@ -31,9 +34,10 @@ public class DiceMonasteryParams extends TunableParameters {
     public boolean mandateTreasureLoss = false;
     public boolean calfSkinsRotInWinter = true;
     public boolean libraryWritingSets = false;
-    public int brewBeerCost = 2, brewMeadCost =2, bakeBreadCost = 1, bakeBreadYield = 2;
-    public int takePigmentCost = 1, prepareInkCost = 2, makeCandleCost=2, prepareVellumCost=2;
+    public int brewBeerCost = 2, brewMeadCost = 2, bakeBreadCost = 1, bakeBreadYield = 2;
+    public int takePigmentCost = 1, prepareInkCost = 2, makeCandleCost = 2, prepareVellumCost = 2;
     public int hireNoviceCost = 3, waxPerCandle = 1;
+    public double vividInkPoints = 0.0, vellumPoints = 0.0, candlePoints = 0.0;
 
     @Override
     public void _reset() {
@@ -41,7 +45,7 @@ public class DiceMonasteryParams extends TunableParameters {
         dataPath = (String) getParameterValue("dataPath");
         mandateTreasureLoss = (boolean) getParameterValue("mandateTreasureLoss");
         calfSkinsRotInWinter = (boolean) getParameterValue("calfSkinsRotInWinter");
-        libraryWritingSets = (boolean)  getParameterValue("libraryWritingSets");
+        libraryWritingSets = (boolean) getParameterValue("libraryWritingSets");
         brewBeerCost = (int) getParameterValue("brewBeerCost");
         brewMeadCost = (int) getParameterValue("brewMeadCost");
         bakeBreadCost = (int) getParameterValue("bakeBreadCost");
@@ -52,6 +56,9 @@ public class DiceMonasteryParams extends TunableParameters {
         waxPerCandle = (int) getParameterValue("waxPerCandle");
         prepareVellumCost = (int) getParameterValue("prepareVellumCost");
         hireNoviceCost = (int) getParameterValue("hireNoviceCost");
+        vividInkPoints = (double) getParameterValue("vividInkPoints");
+        vellumPoints = (double) getParameterValue("vellumPoints");
+        candlePoints = (double) getParameterValue("candlePoints");
     }
 
     @Override
@@ -78,6 +85,9 @@ public class DiceMonasteryParams extends TunableParameters {
         retValue.makeCandleCost = makeCandleCost;
         retValue.waxPerCandle = waxPerCandle;
         retValue.hireNoviceCost = hireNoviceCost;
+        retValue.vividInkPoints = vividInkPoints;
+        retValue.candlePoints = candlePoints;
+        retValue.vellumPoints = vellumPoints;
         return retValue;
     }
 
@@ -91,6 +101,7 @@ public class DiceMonasteryParams extends TunableParameters {
                     other.bakeBreadCost == bakeBreadCost && other.bakeBreadYield == bakeBreadYield &&
                     other.takePigmentCost == takePigmentCost && other.prepareInkCost == prepareInkCost &&
                     other.makeCandleCost == makeCandleCost && other.prepareVellumCost == prepareVellumCost &&
+                    other.vellumPoints == vellumPoints && other.candlePoints == candlePoints && other.vividInkPoints == vividInkPoints &&
                     other.calfSkinsRotInWinter == calfSkinsRotInWinter && Arrays.equals(other.BONUS_TOKENS_PER_PLAYER, BONUS_TOKENS_PER_PLAYER);
         }
         return false;
@@ -99,7 +110,8 @@ public class DiceMonasteryParams extends TunableParameters {
     @Override
     public int hashCode() {
         return Objects.hash(YEARS, dataPath, mandateTreasureLoss, calfSkinsRotInWinter, libraryWritingSets, hireNoviceCost, waxPerCandle,
-                brewBeerCost, brewMeadCost, bakeBreadCost, bakeBreadYield, takePigmentCost, prepareInkCost, prepareVellumCost, makeCandleCost)
+                brewBeerCost, brewMeadCost, bakeBreadCost, bakeBreadYield, takePigmentCost, prepareInkCost, prepareVellumCost, makeCandleCost,
+                vividInkPoints, candlePoints, vellumPoints)
                 + 71 * Arrays.hashCode(BONUS_TOKENS_PER_PLAYER);
     }
 

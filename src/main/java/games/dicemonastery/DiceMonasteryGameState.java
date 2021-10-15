@@ -152,7 +152,7 @@ public class DiceMonasteryGameState extends AbstractGameState {
 
         List<Integer> bidPerPlayer = IntStream.range(0, getNPlayers()).map(player -> {
                     Map<Resource, Integer> bid = playerBids.get(player);
-            return bid.getOrDefault(BEER, 0) + bid.getOrDefault(MEAD, 0) * 2;
+                    return bid.getOrDefault(BEER, 0) + bid.getOrDefault(MEAD, 0) * 2;
                 }
         ).boxed().collect(toList());
 
@@ -388,7 +388,7 @@ public class DiceMonasteryGameState extends AbstractGameState {
             }
         }
         if (retValue == null)
-            throw new AssertionError(String.format("Top card %s is not found",  destination));
+            throw new AssertionError(String.format("Top card %s is not found", destination));
         retValue.startPilgrimage(monk, this);
         pilgrimagesStarted.add(retValue);
         return retValue;
@@ -603,8 +603,16 @@ public class DiceMonasteryGameState extends AbstractGameState {
 
     @Override
     public double getGameScore(int playerId) {
-        return (double) (playerTreasuries.get(playerId).getOrDefault(BEER, 0) / 2) +
-                playerTreasuries.get(playerId).getOrDefault(MEAD, 0) +
+        EnumMap<Resource, Integer> treasury = playerTreasuries.get(playerId);
+        return (double) (treasury.getOrDefault(BEER, 0) / 2) +
+                treasury.getOrDefault(MEAD, 0) +
+                treasury.getOrDefault(VELLUM, 0) * getParams().prepareVellumCost +
+                treasury.getOrDefault(CANDLE, 0) * getParams().candlePoints +
+                (treasury.getOrDefault(VIVID_PURPLE_INK, 0) +
+                        treasury.getOrDefault(VIVID_GREEN_INK, 0) +
+                        treasury.getOrDefault(VIVID_RED_INK, 0) +
+                        treasury.getOrDefault(VIVID_BLUE_INK, 0))
+                        * getParams().vividInkPoints +
                 getVictoryPoints(playerId);
     }
 

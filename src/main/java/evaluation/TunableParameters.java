@@ -278,7 +278,6 @@ public abstract class TunableParameters extends AbstractParameters implements IT
                 params.addTunableParameter(pName, params.getDefaultParameterValue(pName),
                         new ArrayList<>(((List<?>) pValue)));
             }
-
         }
         params._reset();
 
