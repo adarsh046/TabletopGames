@@ -613,6 +613,10 @@ public class DiceMonasteryGameState extends AbstractGameState {
                         treasury.getOrDefault(VIVID_RED_INK, 0) +
                         treasury.getOrDefault(VIVID_BLUE_INK, 0))
                         * getParams().vividInkPoints +
+                (treasury.getOrDefault(PALE_GREEN_INK, 0) +
+                        treasury.getOrDefault(PALE_RED_INK, 0) +
+                        treasury.getOrDefault(PALE_BLUE_INK, 0))
+                        * getParams().paleInkPoints +
                 getVictoryPoints(playerId);
     }
 

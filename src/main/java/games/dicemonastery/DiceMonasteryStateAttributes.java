@@ -79,7 +79,14 @@ public enum DiceMonasteryStateAttributes implements IGameAttribute {
     PILGRIMS((s, p) -> s.monksIn(PILGRIMAGE, p).size()),
     DEAD((s, p) -> s.monksIn(GRAVEYARD, p).size()),
     VP(DiceMonasteryGameState::getVictoryPoints),
-    TREASURE((s, p) -> s.getTreasures(p).stream().mapToInt(t -> t.vp).sum());
+    TREASURE((s, p) -> s.getTreasures(p).stream().mapToInt(t -> t.vp).sum()),
+    PSALMS_WRITTEN((s, p) -> s.getNumberWritten(s.writtenTexts.keySet().stream().filter(t -> t.getComponentName().equals("Psalm")).findFirst().orElse(null))),
+    EPISTLES_WRITTEN((s, p) -> s.getNumberWritten(s.writtenTexts.keySet().stream().filter(t -> t.getComponentName().equals("Epistle")).findFirst().orElse(null))),
+    LITURGIES_WRITTEN((s, p) -> s.getNumberWritten(s.writtenTexts.keySet().stream().filter(t -> t.getComponentName().equals("Liturgy")).findFirst().orElse(null))),
+    TREASURE_LEFT((s, p) -> s.availableTreasures().size()),
+    LOWEST_TREASURE_LEFT((s, p) -> s.availableTreasures().stream().mapToInt(t -> t.vp).min().orElse(10)),
+    HIGHEST_TREASURE_LEFT((s, p) -> s.availableTreasures().stream().mapToInt(t -> t.vp).max().orElse(0))
+    ;
 
     private final BiFunction<DiceMonasteryGameState, Integer, Object> lambda;
 
